@@ -1,0 +1,32 @@
+services:
+  redis-alpine:
+    container_name: redis-alpine
+    image: redis:alpine
+    restart: always
+
+  directus:
+    container_name: directus
+    image: directus/directus:latest
+    env_file: .env
+    # environment:
+    #   KEY: 'replace-with-random-value'
+    #   SECRET: 'replace-with-random-value'
+    #   ADMIN_EMAIL: 'admin@example.com'
+    #   ADMIN_PASSWORD: 'd1r3ctu5'
+    #   DB_CLIENT: 'sqlite3'
+    #   DB_FILENAME: '/directus/database/data.db'
+    #   WEBSOCKETS_ENABLED: true
+    networks:
+      - net_pg
+    ports:
+      - 8055:8055
+    volumes:
+      - ./bind/database:/directus/database
+      - ./bind/uploads:/directus/uploads
+      - ./bind/extensions:/directus/extensions
+    depends_on:
+      - redis-alpine
+
+networks:
+  net_pg:
+    # external: true

@@ -1,3 +1,7 @@
+/bind*
+/tmp
+/.tmp
+
 # Logs
 logs
 *.log
