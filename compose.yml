@@ -6,8 +6,9 @@ services:
       - net_pg
 
   directus:
-    container_name: directus
+    container_name: directus-alpine
     image: directus/directus:latest
+    restart: on-failure
     env_file: .env
     networks:
       - net_pg
