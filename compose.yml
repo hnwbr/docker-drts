@@ -15,7 +15,7 @@ services:
     ports:
       - 8055:8055
     volumes:
-      - directus:/directus/database
+      - directus:/directus
       # - ./bind/database:/directus/database
       # - ./bind/uploads:/directus/uploads
       # - ./bind/extensions:/directus/extensions
