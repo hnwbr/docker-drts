@@ -15,12 +15,17 @@ services:
     ports:
       - 8055:8055
     volumes:
-      - ./bind/database:/directus/database
-      - ./bind/uploads:/directus/uploads
-      - ./bind/extensions:/directus/extensions
+      - directus:/directus/database
+      # - ./bind/database:/directus/database
+      # - ./bind/uploads:/directus/uploads
+      # - ./bind/extensions:/directus/extensions
     depends_on:
       - cache
 
 networks:
   net_pg:
+    external: true
+
+volumes:
+  directus:
     external: true

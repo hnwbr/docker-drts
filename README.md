@@ -1,5 +1,7 @@
 # dk-drts
 
+sudo docker volume create directus
+
 sudo mkdir bind
 sudo mkdir bind/database
 sudo mkdir bind/extensions
