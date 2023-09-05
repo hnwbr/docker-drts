@@ -3,7 +3,7 @@ services:
     container_name: cache-redis-alpine
     image: redis:alpine
     networks:
-      - net_pg
+      - pg
 
   directus:
     container_name: directus-alpine
@@ -11,7 +11,7 @@ services:
     restart: on-failure
     env_file: .env
     networks:
-      - net_pg
+      - pg
     ports:
       - 8055:8055
     volumes:
@@ -23,7 +23,7 @@ services:
       - cache
 
 networks:
-  net_pg:
+  pg:
     external: true
 
 volumes:
