@@ -11,6 +11,7 @@ services:
     restart: on-failure
     env_file: .env
     networks:
+      - nginx
       - pg
     ports:
       - 8055:8055
@@ -23,6 +24,8 @@ services:
       - cache
 
 networks:
+  nginx:
+    external: true
   pg:
     external: true
 
