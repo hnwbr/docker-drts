@@ -2,6 +2,7 @@ services:
   cache:
     container_name: cache-redis-alpine
     image: redis:alpine
+    restart: on-failure
     networks:
       - pg
 
