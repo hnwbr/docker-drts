@@ -1,13 +1,13 @@
 services:
-  cache:
-    container_name: cache-redis-alpine
+  redis:
+    container_name: redis
     image: redis:alpine
     restart: on-failure
     networks:
       - pg
 
   directus:
-    container_name: directus-alpine
+    container_name: directus
     image: directus/directus:latest
     restart: on-failure
     env_file: .env
@@ -22,7 +22,7 @@ services:
       # - ./bind/uploads:/directus/uploads
       # - ./bind/extensions:/directus/extensions
     depends_on:
-      - cache
+      - redis
 
 networks:
   nginx:
@@ -32,4 +32,4 @@ networks:
 
 volumes:
   directus:
-    external: true
+    # external: true
