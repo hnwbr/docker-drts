@@ -10,6 +10,11 @@ services:
     container_name: directus
     image: directus/directus:latest
     restart: on-failure
+    deploy:
+      resources:
+        limits:
+          cpus: '0.5'
+          memory: 150m
     env_file: .env
     networks:
       - nginx
