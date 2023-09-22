@@ -9,17 +9,18 @@ services:
   directus:
     container_name: directus
     image: directus/directus:latest
+    depends_on:
+      - redis
     deploy:
       resources:
         limits:
-          cpus: '0.5'
-          memory: 150m
+          cpus: $DIRECTUS_LIMITS_CPUS
+          memory: $DIRECTUS_LIMITS_MEMORY
       restart_policy:
-        condition: on-failure
-        delay: 30s
-        max_attempts: 5
-        window: 2m
-    env_file: .env
+        condition: $DIRECTUS_RESTART_CONDITION
+        delay: $DIRECTUS_RESTART_DELAY
+        max_attempts: $DIRECTUS_RESTART_MAX_ATTEMPTS
+        window: $DIRECTUS_RESTART_WINDOW
     networks:
       - nginx
       - pg
@@ -30,8 +31,6 @@ services:
       # - ./bind/database:/directus/database
       # - ./bind/uploads:/directus/uploads
       # - ./bind/extensions:/directus/extensions
-    depends_on:
-      - redis
 
 networks:
   nginx:
