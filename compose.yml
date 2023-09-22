@@ -9,6 +9,7 @@ services:
   directus:
     container_name: directus
     image: directus/directus:latest
+    env_file: .env
     depends_on:
       - redis
     deploy:
