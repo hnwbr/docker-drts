@@ -2,6 +2,8 @@
 
 ```bash
 
+sudo docker network create redis
+
 sudo docker volume create directus
 
 sudo mkdir bind

@@ -2,9 +2,9 @@ services:
   redis:
     container_name: redis
     image: redis:alpine
-    restart: on-failure
+    restart: always
     networks:
-      - pg
+      - redis
 
   directus:
     container_name: directus
@@ -25,6 +25,7 @@ services:
     networks:
       - nginx
       - pg
+      - redis
     ports:
       - 8055:8055
     volumes:
@@ -37,6 +38,8 @@ networks:
   nginx:
     external: true
   pg:
+    external: true
+  redis:
     external: true
 
 volumes:
