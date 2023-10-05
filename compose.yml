@@ -5,13 +5,21 @@ services:
     restart: always
     networks:
       - redis
+    healthcheck:
+      test: ['CMD-SHELL', 'redis-cli ping | grep PONG']
+      interval: 10s
+      timeout: 5s
+      retries: 5
 
   directus:
     container_name: directus
     image: directus/directus:latest
     env_file: .env
     depends_on:
-      - redis
+      redis:
+        condition: service_healthy
+      # postgres:
+      #   condition: service_healthy
     deploy:
       resources:
         limits:
@@ -20,8 +28,8 @@ services:
       restart_policy:
         condition: $DIRECTUS_RESTART_CONDITION
         delay: $DIRECTUS_RESTART_DELAY
-        max_attempts: $DIRECTUS_RESTART_MAX_ATTEMPTS
-        window: $DIRECTUS_RESTART_WINDOW
+        max_attempts: 5
+        window: '1h'
     networks:
       - nginx
       - pg
