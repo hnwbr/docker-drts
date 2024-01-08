@@ -13,7 +13,7 @@ services:
 
   directus:
     container_name: directus
-    image: directus/directus:latest
+    image: directus/directus:${DIRECTUS_VERSION_TAG:-latest}
     env_file: .env
     depends_on:
       redis:
